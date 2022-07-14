@@ -1,0 +1,13 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional eslint cache
+.eslintcache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
