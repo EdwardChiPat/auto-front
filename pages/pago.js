@@ -1,122 +1,82 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/header/header';
+import Meta from '../components/seo/meta';
 import { connect } from 'react-redux';
 import CardSummary from '../components/cards/card-summary';
-
-const months = [
-  {
-    id: "01",
-    name: "Enero"
-  },
-  {
-    id: "02",
-    name: "Febrero"
-  },
-  {
-    id: "03",
-    name: "Marzon"
-  },
-  {
-    id: "04",
-    name: "Abril"
-  },
-  {
-    id: "05",
-    name: "Mayo"
-  },
-  {
-    id: "06",
-    name: "Junio"
-  },
-  {
-    id: "07",
-    name: "Julio"
-  },
-  {
-    id: "08",
-    name: "Agosto"
-  },
-  {
-    id: "09",
-    name: "Septiembre"
-  },
-  {
-    id: "10",
-    name: "Octubre"
-  },
-  {
-    id: "11",
-    name: "Noviembre"
-  },
-  {
-    id: "12",
-    name: "Diciembre"
-  }
-]
-
-const msi = [12, 24, 36, 60];
+import { inputs } from '../helper/static';
+import { postApi } from '../services/api';
+import { addPrices } from '../helper/price';
+import { resetCart, setProducts, setTicket } from '../store/shopping/reducer';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const Pago = ({cart, currency}) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const payCars = (e) => {
-    console.log("e", e)
+  const postPayment = async (data) => {
+    const payment = await postApi('api/pago', data);
+    return payment;
+  }
+
+  const payCars = async (e) => {
+    e.preventDefault();
+    let object = {};
+    inputs.map(item => {
+      object[item?.name] = e.target[item?.name].value 
+    })
+    object.product = cart;
+    object.total = addPrices(cart, currency, true);
+    try {
+      const response = await postPayment(object);
+      if (!response.error){
+        dispatch(setTicket(response.data))
+        dispatch(resetCart([]));
+        dispatch(setProducts([]));
+        router.push('/gracias');
+      } else {
+        alert(response.message);
+      }
+    } catch (e) {
+      console.log("error ", e)
+    }
   }
 
   return (
     <>
+      <Meta title="PAGO | AUTOS CANCÚN"  description="LISTO PARA COMPRAR" />
       <Header notShoppingCart />
-      <div className="flex flex-col px-32">
-        <h1 className="text-center font-bold text-2xl py-10">PAGO</h1>
-        <div className="flex flex-row flex-wrap">
-          <form onSubmit={payCars} className="sm:w-2/3 w-full">
+      <div className="flex flex-col sm:px-32 px-2 pb-10">
+        <h1 className="text-center font-bold text-2xl sm:py-10 py-3">PAGO</h1>
+          <form onSubmit={payCars}>
             <div className="flex flex-row flex-wrap">
-              <div className="flex flex-col sm:w-1/2 w-full p-6">
-                <p className="px-2">Nombre(s):</p>
-                <input className="border border-black rounded px-2" name="name" required />
+              <div className="sm:w-2/3 w-full py-4">
+                <div className="flex flex-row flex-wrap">
+                  {inputs.map(item =>
+                    item?.type === 'select' ?
+                      <div className="flex flex-col sm:w-1/2 w-full sm:p-6 p-2">
+                        <p className="px-2">{item?.title}</p>
+                        <select className="border border-black rounded px-2" name={item?.name}>
+                          {
+                            item?.content.map(row =>
+                              <option value={row.id}>{row?.name}</option>  
+                            )
+                          }
+                        </select>
+                      </div>
+                    :
+                      <div className="flex flex-col sm:w-1/2 w-full sm:p-6 p-2">
+                        <p className="px-2">{item?.title}</p>
+                        {console.log("required", item?.required)}
+                        <input className="border border-black rounded px-2" name={item?.name} maxLength={item?.maxLength} required={item?.required === undefined ? true : false} />
+                      </div>
+                  )}
+                </div>
               </div>
-              <div className="flex flex-col sm:w-1/2 w-full p-6">
-                <p className="px-2">Apellido(s):</p>
-                <input className="border border-black rounded px-2" name="lastname" />
-              </div>
-              <div className="flex flex-col sm:w-1/2 w-full p-6">
-                <p className="px-2">Número de tarjeta(s):</p>
-                <input className="border border-black rounded px-2" name="card" required maxLength="16" />
-              </div>
-              <div className="flex flex-col sm:w-1/2 w-full p-6">
-                <p className="px-2">CVV:</p>
-                <input className="border border-black rounded px-2" name="cvv" required maxLength="4" />
-              </div>
-              <div className="flex flex-col sm:w-1/2 w-full p-6">
-                <p className="px-2">Año:</p> 
-                <input className="border border-black rounded px-2" name="anio" required maxLength="4" />
-              </div>
-              <div className="flex flex-col sm:w-1/2 w-full p-6">
-                <p className="px-2">Mes:</p>
-                <select className="border border-black rounded px-2" name="month">
-                  {
-                    months.map(item =>
-                      <option value={item.id}>{item?.name}</option>  
-                    )
-                  }
-                </select>
-              </div>
-              <div className="flex flex-row w-full items-center py-6 justify-center">
-                <p className="px-2">Enganche:</p>
-                <input className="border border-black rounded px-2" name="advanced" />
-                <p className="px-2">Cuotas:</p>
-                <select className="border border-black rounded px-2" name="msi">
-                  {
-                    msi.map(item =>
-                      <option value={item}>{item}</option>  
-                    )
-                  }
-                </select>
-              </div>
+              <CardSummary data={cart} currency={currency} cardWith="w-1/3" payment />
             </div>
           </form>
-          <CardSummary data={cart} currency={currency} cardWith="w-1/3" payment />
-        </div>
       </div>
     </>
   )

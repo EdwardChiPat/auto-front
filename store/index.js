@@ -13,7 +13,8 @@ const masterReducers = (state, action) => {
       data: {
         products: action.payload.data.products,
         currency: action.payload.data.currency,
-        cart: [...action.payload.data.cart, ...state.data.cart]
+        cart: [...action.payload.data.cart, ...state.data.cart],
+        ticket: action.payload.data.ticket
       }
     }
     return nextState

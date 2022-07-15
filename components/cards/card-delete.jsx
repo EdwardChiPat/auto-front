@@ -11,14 +11,12 @@ const CardDelete = ({data, cardWith, currency}) => {
   }
 
   return (
-    <div className={`flex flex-col p-4 sm:${cardWith} w-full`}>
+    <div className={`flex flex-col p-4 sm:${cardWith} w-full shadow-xl shadow-grisaceo-200 mx-2`}>
       <div className="flex flex-col p-6">
         <h1 className="text-lg font-bold py-2">{data?.name}</h1>
         <div className="flex flex-row justify-between">
           <h2 className="text-base py-2 text-left">{data?.maker}</h2>
           {data?.selectedColor && <h2 className="text-base py-2">{data?.selectedColor}</h2>}
-          
-
         </div>
         <Price price={data} currency={currency} className="font-bold text-right"/>
         <div className="py-2">

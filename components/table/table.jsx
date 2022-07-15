@@ -6,7 +6,7 @@ import imageCard from '../../public/img/mazda.jpeg';
 
 const Table = ({data, titles, currency}) => {
   return (
-    <table className="border-b border-b-gray-600 my-2">
+    <table className="border-b border-b-gray-600 my-2 text-center">
       <thead>
         <tr>
           {titles.map(item =>

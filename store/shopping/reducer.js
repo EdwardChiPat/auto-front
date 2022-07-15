@@ -5,7 +5,8 @@ export const shoppingSlice = createSlice({
   initialState: {
     products: [],
     currency: "MXN",
-    cart: []
+    cart: [],
+    ticket: {} 
   },
   reducers: {
     setProducts: (state, action) => {
@@ -27,9 +28,12 @@ export const shoppingSlice = createSlice({
       const elements = state.cart.filter((item) => item._id !== action.payload)
       state.cart = elements;
     },
+    setTicket: (state, action) => {
+      state.ticket = action.payload;
+    }
   }
 });
 
-export const { setProducts, setCurrency, setCart, resetCart, deleteCartById } = shoppingSlice.actions;
+export const { setProducts, setCurrency, setCart, resetCart, deleteCartById, setTicket } = shoppingSlice.actions;
 
 export default shoppingSlice.reducer;

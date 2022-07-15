@@ -26,8 +26,8 @@ const CardInfo = ({data, cardWith, currency}) => {
   }
 
   return (
-    <div className={`sm:${cardWith} w-full p-4`}>
-      <div className="flex flex-col shadow-2xl border border-black">
+    <div className={`${cardWith} lg:w-1/3 p-4`}>
+      <div className="flex flex-col shadow-2xl shadow-gray-400 bg-grisaceo-100 rounded-b-2xl">
         <Image src={imageCard} />
         <div className="flex flex-col p-6">
           <h1 className="text-lg font-bold py-2">{data?.name}</h1>
@@ -46,7 +46,7 @@ const CardInfo = ({data, cardWith, currency}) => {
             className="text-right font-bold text-base py-2"
           />
           <div className="py-2">
-            <button type="button" className="p-2 my-1 bg-cyan-500 text-white rounded-2xl uppercase w-full" onClick={addShoppingCart} >agregar al carrito</button>
+            <button type="button" className="p-2 my-1 bg-grisaceo-400 text-white rounded-2xl uppercase w-full" onClick={addShoppingCart} >agregar al carrito</button>
           </div>
         </div>
       </div>

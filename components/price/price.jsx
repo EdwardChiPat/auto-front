@@ -6,8 +6,7 @@ const Price = ({ price, currency, className }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    console.log("CURREN", currency)
-    setTotal(changePrice(currency === "MXN" ? price?.price_mxn : price?.price_usd, currency));
+    setTotal(changePrice(price, currency));
   }, [currency]);
   
   return (
