@@ -14,7 +14,7 @@ export const post = async (url, body) => {
         'Content-Type': 'application/json',
         'Host':'hostName'
     },
-    body: JSON.stringify(body)
+    body: body
   }
   const response  = await fetch(`${baseUrl}${url}`, config);
   const data = await response.json();
