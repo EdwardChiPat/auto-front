@@ -39,7 +39,7 @@ export const postApi = async (url, body) => {
   }
   console.log("data5",config)
   const response  = await fetch(`${url}`, config);
-  const data = await response.json();
   console.log("data15",data)
+  const data = await response.json();
   return data
 }
