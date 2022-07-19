@@ -20,6 +20,7 @@ export const post = async (url, body) => {
   }
   const response  = await fetch(`${baseUrl}${url}`, config);
   const data = await response.json();
+  console.log("data4", data)
   return data
 }
 
