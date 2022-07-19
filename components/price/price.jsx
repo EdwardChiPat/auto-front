@@ -9,7 +9,7 @@ const Price = ({ price, currency, className }) => {
     * Ciclo de vida que se renderiza cuando se cambia de moneda
   */
   useEffect(() => {
-    setTotal(changePrice(total, currency));
+    setTotal(changePrice(price, currency));
   }, [currency]);
   
   return (
