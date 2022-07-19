@@ -10,9 +10,10 @@ export const post = async (url, body) => {
   const config = {
     method: 'POST',
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Host':'hostName'
+      "User-Agent":"*", 
+      'Accept': 'application/json; charset=UTF-8',
+      'Content-Type': 'application/json',
+      'Host':'hostName'
     },
     body: JSON.stringify(body)
   }
@@ -25,9 +26,10 @@ export const postApi = async (url, body) => {
   const config = {
     method: 'POST',
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Host':'hostName'
+      "User-Agent":"*", 
+      'Accept': 'application/json; charset=UTF-8',
+      'Content-Type': 'application/json',
+      'Host':'hostName'
     },
     body: JSON.stringify(body)
   }
