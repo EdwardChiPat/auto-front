@@ -18,7 +18,7 @@ const Table = ({data, titles, currency}) => {
       <tbody>
         {data.map(item =>
           <tr key={nanoid()}>
-            <td className="p-2"><Image src={imageCard} width="50" height="50" /></td>
+            <td className="p-2"><Image src={imageCard} width="50" height="50" alt={item?.name} /></td>
             <td className="p-2">{item?.name}</td>
             <td className="p-2"><Price className="font-medium text-base" price={item} currency={currency} /></td>
           </tr>  

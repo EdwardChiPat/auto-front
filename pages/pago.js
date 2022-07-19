@@ -69,7 +69,7 @@ const Pago = ({cart, currency}) => {
                         <select className="border border-black rounded px-2" name={item?.name}>
                           {
                             item?.content.map(row =>
-                              <option value={row.id}>{row?.name}</option>  
+                              <option key={nanoid()} value={row.id}>{row?.name}</option>  
                             )
                           }
                         </select>

@@ -39,7 +39,7 @@ const CardInfo = ({data, cardWith, currency}) => {
     <>
       <div className={`${cardWith} lg:w-1/3 p-4`}>
         <div className="flex flex-col shadow-2xl shadow-gray-400 bg-grisaceo-100 rounded-b-2xl">
-          <Image src={imageCard} />
+          <Image src={imageCard} alt={data?.name} />
           <div className="flex flex-col p-6">
             <h1 className="text-lg font-bold py-2">{data?.name}</h1>
             <h2 className="text-base py-3">{data?.maker}</h2>

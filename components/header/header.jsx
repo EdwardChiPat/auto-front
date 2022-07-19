@@ -5,6 +5,8 @@ import { useDispatch, connect } from 'react-redux';
 import { setCurrency } from '../../store/shopping/reducer';
 import Link from 'next/link';
 import { nanoid } from '@reduxjs/toolkit';
+import Image from 'next/image';
+import Car from '../../public/img/logo-header.png';
 
 const currencys = ["MXN", "USD"];
 
@@ -28,7 +30,7 @@ const Header = ({ notShoppingCart, currency }) => {
   return (
     <nav className="sm:px-32 px-0 sticky top-0 z-50 bg-grisaceo-500 bg-opacity-80">
       <ul className="flex flex-row items-center sm:justify-between justify-around text-white relative">
-        <li className="cursor-pointer" ><Link href="/"><img src="/img/logo-header.png" width="100" height="100" /></Link></li>
+        <li className="cursor-pointer" ><Link href="/"><Image src={Car} width="100" height="100" alt="Autos cancún" /></Link></li>
         <li className="flex flex-row">
           {!notShoppingCart && <ShoppingCart />}
           <select onChange={changeCurrency} className="bg-indigo-400 bg-opacity-0" value={selectedCurrency}>
