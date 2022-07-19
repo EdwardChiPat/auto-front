@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux';
 import CardInfo from '../components/cards/card-info';
 import { get } from '../services/api';
 import Meta from '../components/seo/meta';
+import { nanoid } from '@reduxjs/toolkit';
 
 function Home() {
   const { products } = useSelector((state) => state.data);
+  console.log("products", products)
   return (
     <>
       <Meta title="INICIO | AUTOS CANCÚN"  description="ENCUENTRA LOS MEJORES AUTOS" />
@@ -17,7 +19,7 @@ function Home() {
           <h1 className="font-bold text-4xl text-center py-10">COMPRAR AUTO</h1>
           <div className="flex flex-row flex-wrap justify-around">
             {products.length > 0 && products.map(item => 
-              <CardInfo data={item} cardWith="sm:w-full md:w-1/2" />
+              <CardInfo data={item} cardWith="sm:w-full md:w-1/2" key={nanoid()} />
             )}
           </div>
         </div>

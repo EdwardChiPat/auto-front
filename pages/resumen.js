@@ -6,6 +6,7 @@ import CardSummary from '../components/cards/card-summary';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 import Meta from '../components/seo/meta';
+import { nanoid } from '@reduxjs/toolkit';
 
 const Resumen = ({cart, currency}) => {
   return (
@@ -25,7 +26,7 @@ const Resumen = ({cart, currency}) => {
             <h1 className="p-2 border-b border-b-gray-400 w-full text-2xl font-bold">Resumen de compra</h1>
             <div className="flex flex-row overflow-x-auto justify-between p-10">
               {cart.map(item =>
-                <CardDelete data={item} cardWith="w-1/3" currency={currency} />
+                <CardDelete data={item} cardWith="w-1/3" currency={currency} key={nanoid()} />
               )}
             </div>
           </div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Price from '../price/price';
 import { addPrices } from '../../helper/price';
 import Link from 'next/link';
+import { nanoid } from '@reduxjs/toolkit';
 
 const CardSummary = ({ data, cardWith, currency, payment }) => {
   return (
@@ -10,7 +11,7 @@ const CardSummary = ({ data, cardWith, currency, payment }) => {
       <div className="flex flex-col p-6">
         <h1 className="text-lg font-bold py-2">Resumen de compra: {data?.length} producto(s)</h1>
         {data.map(item =>
-          <div className="flex flex-row border-b border-b-zinc-400 justify-between py-2">
+          <div key={nanoid()} className="flex flex-row border-b border-b-zinc-400 justify-between py-2">
             <p>1 {item?.name}</p>
             {item?.selectedColor && <p>{item?.selectedColor}</p>}
             <Price price={item} currency={currency} />

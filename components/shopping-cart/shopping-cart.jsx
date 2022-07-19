@@ -16,19 +16,27 @@ const titles = [
 const ShoppingCart = ({ cart, currency }) => {
   const dispatch = useDispatch();
   const [viewCart, setViewCart] = useState(false);
-
+  /**
+    * Ciclo de vida para actualizar el estado cuando el estado de cart cambie
+  */
   useEffect(() => {
     if (cart.length > 0){
       setViewCart(true);
     }
   }, [cart])
 
+  /**
+    * Función para visualizar el carrito de compra
+  */
   const showCart = () => {
     setTimeout(() => {
       setViewCart(true);
     }, 200);
   }
 
+  /**
+    * Función para ocultar el carrito de compra
+  */
   const hiddenCart = () => {
     setViewCart(false);
   }

@@ -10,16 +10,25 @@ import { addPrices } from '../helper/price';
 import { resetCart, setProducts, setTicket } from '../store/shopping/reducer';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { nanoid } from '@reduxjs/toolkit';
 
 const Pago = ({cart, currency}) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  /**
+    * Función para ejecutar la API de Pago
+    * @param {Object} data - Objeto con los datos para el pago
+  */
   const postPayment = async (data) => {
     const payment = await postApi('api/pago', data);
     return payment;
   }
 
+  /**
+    * Función para ejecutar la función de pago
+    * @param {Event} e - Objeto del evento onSubmit
+  */
   const payCars = async (e) => {
     e.preventDefault();
     let object = {};
@@ -55,7 +64,7 @@ const Pago = ({cart, currency}) => {
                 <div className="flex flex-row flex-wrap">
                   {inputs.map(item =>
                     item?.type === 'select' ?
-                      <div className="flex flex-col sm:w-1/2 w-full sm:p-6 p-2">
+                      <div key={nanoid()} className="flex flex-col sm:w-1/2 w-full sm:p-6 p-2">
                         <p className="px-2">{item?.title}</p>
                         <select className="border border-black rounded px-2" name={item?.name}>
                           {
@@ -66,9 +75,8 @@ const Pago = ({cart, currency}) => {
                         </select>
                       </div>
                     :
-                      <div className="flex flex-col sm:w-1/2 w-full sm:p-6 p-2">
+                      <div key={nanoid()} className="flex flex-col sm:w-1/2 w-full sm:p-6 p-2">
                         <p className="px-2">{item?.title}</p>
-                        {console.log("required", item?.required)}
                         <input className="border border-black rounded px-2" name={item?.name} maxLength={item?.maxLength} required={item?.required === undefined ? true : false} />
                       </div>
                   )}

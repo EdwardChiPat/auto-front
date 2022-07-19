@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Price from '../price/price';
 import Image from 'next/image'
 import imageCard from '../../public/img/mazda.jpeg';
+import { nanoid } from 'nanoid';
 
 const Table = ({data, titles, currency}) => {
   return (
@@ -10,13 +11,13 @@ const Table = ({data, titles, currency}) => {
       <thead>
         <tr>
           {titles.map(item =>
-              <th>{item}</th>
+              <th key={nanoid()}>{item}</th>
             )}
         </tr>
       </thead>
       <tbody>
         {data.map(item =>
-          <tr>
+          <tr key={nanoid()}>
             <td className="p-2"><Image src={imageCard} width="50" height="50" /></td>
             <td className="p-2">{item?.name}</td>
             <td className="p-2"><Price className="font-medium text-base" price={item} currency={currency} /></td>

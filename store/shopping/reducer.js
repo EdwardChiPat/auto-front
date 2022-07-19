@@ -19,6 +19,8 @@ export const shoppingSlice = createSlice({
       const element = state.cart.filter((item => item?._id === action?.payload._id))
       if(element.length === 0){
         state.cart.push(action.payload)
+      } else {
+        alert('Este producto ya esta en el carrito')
       }
     },
     resetCart: (state, action) => {

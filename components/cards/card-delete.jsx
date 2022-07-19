@@ -4,6 +4,12 @@ import Price from '../price/price';
 import { useDispatch } from 'react-redux'
 import { deleteCartById } from '../../store/shopping/reducer';
 
+/**
+  * Función para eliminar del store
+  * @param {Object} data - Objecto que se eliminará del store
+  * @param {String} cardWith - Clases para la clase padre de la card
+  * @param {String} currency - Moneda
+ */
 const CardDelete = ({data, cardWith, currency}) => {
   const dispatch = useDispatch();
   const deleteItem = () => {
@@ -20,7 +26,9 @@ const CardDelete = ({data, cardWith, currency}) => {
         </div>
         <Price price={data} currency={currency} className="font-bold text-right"/>
         <div className="py-2">
-          <button type="button" className="p-2 my-1 bg-cyan-500 text-white rounded-2xl uppercase w-full" onClick={deleteItem}>Eliminar</button>
+          <button type="button" className="p-2 my-1 bg-cyan-500 text-white rounded-2xl uppercase w-full" onClick={deleteItem}>
+            Eliminar
+          </button>
         </div>
       </div>
     </div>

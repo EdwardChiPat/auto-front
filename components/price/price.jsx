@@ -3,8 +3,12 @@ import PropTypes from "prop-types";
 import { changePrice } from '../../helper/price';
 
 const Price = ({ price, currency, className }) => {
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(changePrice(price, currency));
 
+  /**
+    * Ciclo de vida que se renderiza cuando se cambia de moneda
+    * @param {Event} e - Evento del onClick
+  */
   useEffect(() => {
     setTotal(changePrice(price, currency));
   }, [currency]);
@@ -21,13 +25,12 @@ const Price = ({ price, currency, className }) => {
 }
 
 Price.propTypes = {
-  price: PropTypes.number,
+  price: PropTypes.instanceOf(Object).isRequired,
   currency: PropTypes.string,
   className: PropTypes.string
 }
 
 Price.defaultProps = {
-  price: 0,
   currency: 'MXN',
   className: ''
 }

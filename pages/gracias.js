@@ -9,7 +9,9 @@ import Meta from '../components/seo/meta';
 
 const Gracias = ({ ticket, currency }) => {
   const doc = new jsPDF();
-
+  /**
+    * Función para crear un PDF con los datos del store en la card
+  */
   const createPDF = async () => {
     doc.setFontSize(25)
     doc.text(35,25, `Gracias por tu compra ${ticket?.name}`);
@@ -30,8 +32,12 @@ const Gracias = ({ ticket, currency }) => {
       })
     }
     autoTable(doc, {body: ticket?.deadlines, columns: [{header: 'Mes', dataKey: 'month'}, {header: 'Pago', dataKey: 'pay'}], startY: y+=10})
-    doc.save('test.pdf'); 
+    doc.save('ticket.pdf'); 
   }
+
+  /**
+    * Función para crear un PDF al darle click al botón
+  */
 
   const downloadTicket = () => {
     createPDF();
