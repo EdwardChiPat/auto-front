@@ -18,6 +18,7 @@ export const post = async (url, body) => {
     },
     body: JSON.stringify(body)
   }
+  console.log("data10",config)
   const response  = await fetch(`${baseUrl}${url}`, config);
   const data = await response.json();
   console.log("data4", data)
@@ -25,6 +26,7 @@ export const post = async (url, body) => {
 }
 
 export const postApi = async (url, body) => {
+  console.log("data1",body)
   const config = {
     method: 'POST',
     headers: {
@@ -35,6 +37,7 @@ export const postApi = async (url, body) => {
     },
     body: JSON.stringify(body)
   }
+  console.log("data5",config)
   const response  = await fetch(`${url}`, config);
   const data = await response.json();
   return data
