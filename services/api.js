@@ -7,7 +7,6 @@ export const get = async (url) => {
 }
 
 export const post = async (url, body) => {
-  console.log("data2",body)
   const config = {
     method: 'POST',
     headers: {
@@ -18,15 +17,12 @@ export const post = async (url, body) => {
     },
     body: JSON.stringify(body)
   }
-  console.log("data10",config)
   const response  = await fetch(`${baseUrl}${url}`, config);
   const data = await response.json();
-  console.log("data4", data)
   return data
 }
 
 export const postApi = async (url, body) => {
-  console.log("data1",body)
   const config = {
     method: 'POST',
     headers: {
@@ -37,9 +33,7 @@ export const postApi = async (url, body) => {
     },
     body: JSON.stringify(body)
   }
-  console.log("data5",config)
   const response  = await fetch(`${url}`, config);
-  console.log("data15",data)
   const data = await response.json();
   return data
 }
